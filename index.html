@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Filters</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+
+  <body>
+    <!-- products -->
+    <section class="products">
+      <!-- filters -->
+      <div class="filters-container">
+        <!-- search -->
+        <form class="input-form">
+          <input type="text" class="search-input" placeholder="search..." />
+        </form>
+        <!-- categories -->
+        <h5>Company</h5>
+        <article class="companies">
+          <button class="company-btn" data-btn="gg">all</button>
+          <button class="company-btn" data-btn="red-car">red-car</button>
+          <button class="company-btn" data-btn="yellow-car">yellow-car</button>
+          <button class="company-btn" data-btn="blue-car">blue-car</button>
+          <button class="company-btn" data-btn="bike">bike</button>
+        </article>
+      </div>
+      <!-- products -->
+      <div class="products-container">
+        <!-- single product -->
+        <article class="product" data-item="blue-car">
+          <img
+            src="./pexels-mike-b-244206.jpg"
+            class="product-img img"
+            alt=""
+          />
+          <footer>
+            <h5 class="product-name">blue-car 1</h5>
+            <span class="product-price">$9.99</span>
+          </footer>
+        </article>
+        <article class="product" data-item="blue-car">
+          <img
+            src="./pexels-mike-b-244206.jpg"
+            class="product-img img"
+            alt=""
+          />
+          <footer>
+            <h5 class="product-name">blue-car 2</h5>
+            <span class="product-price">$9.99</span>
+          </footer>
+        </article>
+        <article class="product" data-item="yellow-car">
+          <img
+            src="./pexels-pixabay-39855.jpg"
+            class="product-img img"
+            alt=""
+          />
+          <footer>
+            <h5 class="product-name">yellow-car 1</h5>
+            <span class="product-price">$9.99</span>
+          </footer>
+        </article>
+        <article class="product" data-item="red-car">
+          <img
+            src="./pexels-charles-kettor-831475.jpg"
+            class="product-img img"
+            alt=""
+          />
+          <footer>
+            <h5 class="product-name">red-car 2</h5>
+
+            <span class="product-price">$9.99</span>
+          </footer>
+        </article>
+        <article class="product" data-item="bike">
+          <img
+            src="./pexels-thgusstavo-santana-2607554.jpg"
+            class="product-img img"
+            alt=""
+          />
+          <footer>
+            <h5 class="product-name">bike</h5>
+            <span class="product-price">$9.99</span>
+          </footer>
+        </article>
+        <article class="product" data-item="red-car">
+          <img
+            src="./pexels-pavlo-luchkovski-337909.jpg"
+            class="product-img img"
+            alt=""
+          />
+          <footer>
+            <h5 class="product-name">red-car 2</h5>
+            <span class="product-price">$9.99</span>
+          </footer>
+        </article>
+      </div>
+    </section>
+    <script>
+      const btns = document.querySelectorAll(".company-btn");
+      const companies = document.querySelector(".companies");
+      const boxs = document.querySelectorAll(".product");
+      btns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          var btn_Filter = btn.getAttribute("data-btn");
+          console.log(btn_Filter);
+          if (btn.classList.contains("active")) {
+            companies
+              .querySelector(".company-btn.active")
+              .classList.remove("active");
+          } else {
+            if (companies.querySelector(".company-btn.active")) {
+              companies
+                .querySelector(".company-btn.active")
+                .classList.remove("active");
+            }
+            btn.classList.add("active");
+
+            boxs.forEach((box) => {
+              var box_filter = box.getAttribute("data-item");
+
+              if (btn_Filter === box_filter) {
+                box.classList.remove("actiive");
+              } else {
+                box.classList.add("actiive");
+                box.classList.remove("gfd");
+              }
+            });
+          }
+        });
+
+        btn.addEventListener("click", (e) => {
+          if (e.target.getAttribute("data-btn") === "gg") {
+            habib();
+          }
+        });
+      });
+      function habib() {
+        boxs.forEach((box) => {
+          box.classList.add("gfd");
+          box.classList.remove("actiive");
+        });
+      }
+
+      const search_bar = document.querySelector(".search-input");
+
+      search_bar.addEventListener("keyup", () => {
+        const search_value = search_bar.value.toUpperCase();
+
+        boxs.forEach((box) => {
+          const box_title = box.querySelector("h5").textContent.toUpperCase();
+          if (box_title.indexOf(search_value) > -1) {
+            box.classList.add("gfd");
+            box.classList.remove("actiive");
+          } else {
+            box.classList.add("actiive");
+            box.classList.remove("gfd");
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
